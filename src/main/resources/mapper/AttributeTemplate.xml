@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.csmall.product.mapper.AttributeTemplateMapper">
+    <!--int insert(AttributeTemplate attributeTemplate);-->
+    <insert id="insert">
+        INSERT INTO pms_attribute_template(
+            name,pinyin,keywords,sort
+        )VALUES(
+                   #{name},#{pinyin},#{keywords},#{sort}
+               )
+    </insert>
+
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pms_attribute_template(name,pinyin,keywords,sort) VALUES
+        <foreach collection="list" item="attributeTemplate" separator=",">
+            (#{attributeTemplate.name},#{attributeTemplate.pinyin},#{attributeTemplate.keywords},#{attributeTemplate.sort})
+        </foreach>
+    </insert>
+
+    <delete id="deleteById">
+        DELETE FROM pms_attribute_template WHERE id = #{id}
+    </delete>
+
+    <!-- int deleteByIds(Long[] ids); -->
+    <delete id="deleteByIds">
+        DELETE
+        FROM
+        pms_attribute_template
+        WHERE id IN (
+        <foreach collection="array" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+
+    <update id="updateById">
+        UPDATE
+        pms_attribute_template
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="pinyin != null">
+                pinyin=#{pinyin},
+            </if>
+            <if test="keywords != null">
+                keywords=#{keywords},
+            </if>
+            <if test="sort != null">
+                sort=#{sort},
+            </if>
+        </set>
+        WHERE
+        id=#{id}
+    </update>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM pms_attribute_template
+    </select>
+
+    <!-- int countByName(String name); -->
+    <select id="countByName" resultType="int">
+        SELECT count(*) FROM pms_attribute_template WHERE name=#{name}
+    </select>
+
+    <select id="getStandardById" resultType="cn.tedu.csmall.product.pojo.vo.AttributeTemplateStandardVO">
+        SELECT id, name, pinyin, keywords, sort
+        FROM pms_attribute_template
+        WHERE id=#{id}
+    </select>
+
+    <select id="list" resultMap="ListResultMap">
+        SELECT <include refid="ListQueryFields"/>
+        FROM pms_attribute_template
+        ORDER BY id DESC
+    </select>
+
+    <sql id="ListQueryFields">
+        <if test="true">
+            id,
+            name,
+            pinyin,
+            keywords,
+            sort
+        </if>
+    </sql>
+
+    <resultMap id="ListResultMap" type="cn.tedu.csmall.product.pojo.vo.AttributeTemplateListItemVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pinyin" property="pinyin"/>
+        <result column="keywords" property="keywords"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
+</mapper>
