@@ -82,6 +82,13 @@ public class BrandMapperTests {
     }
 
     @Test
+    void testCountByName() {
+        String name = "华为";
+        int count = mapper.countByName(name);
+        System.out.println("根据名称【" + name + "】统计数据完成，数量=" + count);
+    }
+
+    @Test
     void testGetStandardById() {
         Long id = 5L;
         Object result = mapper.getStandardById(id);

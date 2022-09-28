@@ -63,6 +63,8 @@ public interface CategoryMapper {
      */
     int count();
 
+    int countByName(String name);
+
     /**
      * 根据id查询类别标准信息
      *

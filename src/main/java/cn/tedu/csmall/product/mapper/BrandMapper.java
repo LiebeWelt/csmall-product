@@ -28,6 +28,8 @@ public interface BrandMapper {
 
     int count();
 
+    int countByName(String name);
+
     /**
      * 根据id查询品牌标准信息
      *

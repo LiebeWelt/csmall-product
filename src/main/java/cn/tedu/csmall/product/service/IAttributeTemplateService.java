@@ -6,4 +6,5 @@ public interface IAttributeTemplateService {
 
     void addNew(AttributeTemplateAddNewDTO attributeTemplateAddNewDTO);
 
+    void delete(Long id);
 }

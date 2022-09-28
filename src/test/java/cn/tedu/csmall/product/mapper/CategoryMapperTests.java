@@ -69,6 +69,13 @@ public class CategoryMapperTests {
     }
 
     @Test
+    void testCountByName() {
+        String name = "家用电器";
+        int count = mapper.countByName(name);
+        System.out.println("根据名称【" + name + "】统计数据完成，数量=" + count);
+    }
+
+    @Test
     void testGetStandardById() {
         Long id = 1L;
         Object result = mapper.getStandardById(id);

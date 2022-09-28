@@ -1,12 +1,14 @@
 package cn.tedu.csmall.product.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 
+@Slf4j
 @Configuration
 @MapperScan("cn.tedu.csmall.product.mapper")
 public class MybatisConfiguration {
     public MybatisConfiguration() {
-        System.out.println("创建配置类：MybatisConfiguration");
+        log.info("创建配置类：MybatisConfiguration");
     }
 }
