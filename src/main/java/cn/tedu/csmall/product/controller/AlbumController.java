@@ -6,6 +6,7 @@ import cn.tedu.csmall.product.service.IAlbumService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,8 +36,8 @@ public class AlbumController{
     }
 
     // http://localhost:8080/albums/delete?id=1
-    @RequestMapping("/delete")
-    public String delete(Long id) {
+    @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
         log.debug("开始处理【删除相册】的请求，参数：{}", id);
         albumService.delete(id);
         return "OK";

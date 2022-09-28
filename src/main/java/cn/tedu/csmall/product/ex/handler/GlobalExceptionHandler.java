@@ -1,6 +1,7 @@
 package cn.tedu.csmall.product.ex.handler;
 
 import cn.tedu.csmall.product.ex.ServiceException;
+import cn.tedu.csmall.product.web.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,9 +17,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler
-    public String handleServiceException(ServiceException e){
+    public JsonResult handleServiceException(ServiceException e){
         log.debug("捕获到ServiceException:{}",e.getMessage());
-        return e.getMessage();
+
+        JsonResult jsonResult = new JsonResult();
+        jsonResult.setState(1);
+        jsonResult.setMessage(e.getMessage());
+        return jsonResult;
     }
 
     @ExceptionHandler
