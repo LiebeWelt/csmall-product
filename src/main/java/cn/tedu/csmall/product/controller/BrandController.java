@@ -6,6 +6,7 @@ import cn.tedu.csmall.product.web.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class BrandController {
 
     //http://localhost:9080/brands/add-new?name=Test001&pinyin=1&logo=1&description=1&keywords=1&sort=1&sales=1&productCount=1&commentCount=1&positiveCommentCount=1&enable=1
     @RequestMapping("/add-new")
-    public JsonResult addNew(BrandAddNewDTO brandAddNewDTO) {
+    public JsonResult addNew(@RequestBody BrandAddNewDTO brandAddNewDTO) {
         log.debug("开始处理【添加品牌】的请求，参数：{}", brandAddNewDTO);
         brandService.addNew(brandAddNewDTO);
         return JsonResult.ok();

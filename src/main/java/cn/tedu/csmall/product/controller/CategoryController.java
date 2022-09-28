@@ -6,6 +6,7 @@ import cn.tedu.csmall.product.web.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class CategoryController {
 
     //http://localhost:9080/categories/add-new?name=Test001&parentId=1&depth=1&keywords=1&sort=1&icon=1&enable=1&isParent=1&isDisplay=1
     @RequestMapping("/add-new")
-    public JsonResult addNew(CategoryAddNewDTO categoryAddNewDTO) {
+    public JsonResult addNew(@RequestBody CategoryAddNewDTO categoryAddNewDTO) {
         log.debug("开始处理【添加类别】的请求，参数：{}", categoryAddNewDTO);
         categoryService.addNew(categoryAddNewDTO);
         return JsonResult.ok();

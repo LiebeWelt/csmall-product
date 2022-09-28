@@ -6,6 +6,7 @@ import cn.tedu.csmall.product.web.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class AttributeTemplateController {
 
     //http://localhost:9080/attribute-template/add-new?name=Test001&pinyin=Test001&keywords=Test001&sort=77
     @RequestMapping("/add-new")
-    public JsonResult addNew(AttributeTemplateAddNewDTO attributeTemplateAddNewDTO){
+    public JsonResult addNew(@RequestBody AttributeTemplateAddNewDTO attributeTemplateAddNewDTO){
         log.debug("开始处理【添加属性模板】的请求，参数：{}", attributeTemplateAddNewDTO);
         attributeTemplateService.addNew(attributeTemplateAddNewDTO);
         return JsonResult.ok();
