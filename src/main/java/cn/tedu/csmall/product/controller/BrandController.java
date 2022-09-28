@@ -21,7 +21,8 @@ public class BrandController {
         log.info("创建控制器类对象：BrandController");
     }
 
-    //http://localhost:9080/brands/add-new?name=Test001&name=1&pinyin=1&logo=1&description=1&keywords=1&sort=1&sales=1&productCount=1&commentCount=1&positiveCommentCount=1&enable=1    @RequestMapping("/add-new")
+    //http://localhost:9080/brands/add-new?name=Test001&pinyin=1&logo=1&description=1&keywords=1&sort=1&sales=1&productCount=1&commentCount=1&positiveCommentCount=1&enable=1
+    @RequestMapping("/add-new")
     public JsonResult addNew(BrandAddNewDTO brandAddNewDTO) {
         log.debug("开始处理【添加品牌】的请求，参数：{}", brandAddNewDTO);
         brandService.addNew(brandAddNewDTO);

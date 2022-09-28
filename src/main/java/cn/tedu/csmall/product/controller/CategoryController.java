@@ -21,7 +21,8 @@ public class CategoryController {
         log.info("创建控制器类对象：CategoryController");
     }
 
-    //http://localhost:9080/categories/add-new?name=Test001&name=1&parentId=1&depth=1&keywords=1&sort=1&icon=1&enable=1&isParent=1&isDisplay=1    @RequestMapping("/add-new")
+    //http://localhost:9080/categories/add-new?name=Test001&parentId=1&depth=1&keywords=1&sort=1&icon=1&enable=1&isParent=1&isDisplay=1
+    @RequestMapping("/add-new")
     public JsonResult addNew(CategoryAddNewDTO categoryAddNewDTO) {
         log.debug("开始处理【添加类别】的请求，参数：{}", categoryAddNewDTO);
         categoryService.addNew(categoryAddNewDTO);
