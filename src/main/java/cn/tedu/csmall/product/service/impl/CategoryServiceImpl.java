@@ -4,6 +4,7 @@ import cn.tedu.csmall.product.ex.ServiceException;
 import cn.tedu.csmall.product.mapper.CategoryMapper;
 import cn.tedu.csmall.product.pojo.dto.CategoryAddNewDTO;
 import cn.tedu.csmall.product.pojo.entity.Category;
+import cn.tedu.csmall.product.pojo.vo.CategoryListItemVO;
 import cn.tedu.csmall.product.pojo.vo.CategoryStandardVO;
 import cn.tedu.csmall.product.service.ICategoryService;
 import cn.tedu.csmall.product.web.ServiceCode;
@@ -11,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -57,5 +60,11 @@ public class CategoryServiceImpl implements ICategoryService {
         log.debug("即将删除类别数据……");
         categoryMapper.deleteById(id);
         log.debug("删除类别，完成！");
+    }
+
+    @Override
+    public List<CategoryListItemVO> list() {
+        log.debug("开始处理【查询相册列表】的业务……");
+        return categoryMapper.list();
     }
 }

@@ -1,6 +1,8 @@
 package cn.tedu.csmall.product.controller;
 
 import cn.tedu.csmall.product.pojo.dto.AttributeTemplateAddNewDTO;
+import cn.tedu.csmall.product.pojo.vo.AlbumListItemVO;
+import cn.tedu.csmall.product.pojo.vo.AttributeTemplateListItemVO;
 import cn.tedu.csmall.product.service.IAttributeTemplateService;
 import cn.tedu.csmall.product.web.JsonResult;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
@@ -9,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Slf4j
@@ -42,5 +46,15 @@ public class AttributeTemplateController {
         log.debug("开始处理【删除属性模板】的请求，参数：{}", id);
         attributeTemplateService.delete(id);
         return JsonResult.ok();
+    }
+
+    // http://localhost:9080/attribute-template
+    @ApiOperation("查询属性模板列表")
+    @ApiOperationSupport(order = 400)
+    @GetMapping("")
+    public JsonResult<List<AttributeTemplateListItemVO>> list() {
+        log.debug("开始处理【查询属性模板列表】的请求……");
+        List<AttributeTemplateListItemVO> list = attributeTemplateService.list();
+        return JsonResult.ok(list);
     }
 }

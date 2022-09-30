@@ -1,6 +1,8 @@
 package cn.tedu.csmall.product.controller;
 
 import cn.tedu.csmall.product.pojo.dto.CategoryAddNewDTO;
+import cn.tedu.csmall.product.pojo.vo.AlbumListItemVO;
+import cn.tedu.csmall.product.pojo.vo.CategoryListItemVO;
 import cn.tedu.csmall.product.service.ICategoryService;
 import cn.tedu.csmall.product.web.JsonResult;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
@@ -9,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -41,5 +45,15 @@ public class CategoryController {
         log.debug("开始处理【删除类别】的请求，参数：{}", id);
         categoryService.delete(id);
         return JsonResult.ok();
+    }
+
+    // http://localhost:9080/categories
+    @ApiOperation("查询类别列表")
+    @ApiOperationSupport(order = 400)
+    @GetMapping("")
+    public JsonResult<List<CategoryListItemVO>> list() {
+        log.debug("开始处理【查询相册列表】的请求……");
+        List<CategoryListItemVO> list = categoryService.list();
+        return JsonResult.ok(list);
     }
 }

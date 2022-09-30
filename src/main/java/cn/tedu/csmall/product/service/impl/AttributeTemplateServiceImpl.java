@@ -5,6 +5,7 @@ import cn.tedu.csmall.product.mapper.AttributeTemplateMapper;
 import cn.tedu.csmall.product.pojo.dto.AttributeTemplateAddNewDTO;
 import cn.tedu.csmall.product.pojo.entity.AttributeTemplate;
 import cn.tedu.csmall.product.pojo.vo.AlbumStandardVO;
+import cn.tedu.csmall.product.pojo.vo.AttributeTemplateListItemVO;
 import cn.tedu.csmall.product.pojo.vo.AttributeTemplateStandardVO;
 import cn.tedu.csmall.product.service.IAttributeTemplateService;
 import cn.tedu.csmall.product.web.ServiceCode;
@@ -12,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -56,5 +59,11 @@ public class AttributeTemplateServiceImpl implements IAttributeTemplateService {
         log.debug("即将删除属性模板数据……");
         attributeTemplateMapper.deleteById(id);
         log.debug("删除属性模板，完成！");
+    }
+
+    @Override
+    public List<AttributeTemplateListItemVO> list() {
+        log.debug("开始处理【查询属性模板列表】的业务……");
+        return attributeTemplateMapper.list();
     }
 }

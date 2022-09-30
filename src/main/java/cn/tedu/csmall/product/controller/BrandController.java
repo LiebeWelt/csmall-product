@@ -1,6 +1,8 @@
 package cn.tedu.csmall.product.controller;
 
 import cn.tedu.csmall.product.pojo.dto.BrandAddNewDTO;
+import cn.tedu.csmall.product.pojo.vo.AlbumListItemVO;
+import cn.tedu.csmall.product.pojo.vo.BrandListItemVO;
 import cn.tedu.csmall.product.service.IBrandService;
 import cn.tedu.csmall.product.web.JsonResult;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
@@ -9,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -41,5 +45,15 @@ public class BrandController {
         log.debug("开始处理【删除品牌】的请求，参数：{}", id);
         brandService.delete(id);
         return JsonResult.ok();
+    }
+
+    // http://localhost:9080/brands
+    @ApiOperation("查询品牌列表")
+    @ApiOperationSupport(order = 400)
+    @GetMapping("")
+    public JsonResult<List<BrandListItemVO>> list() {
+        log.debug("开始处理【查询相册列表】的请求……");
+        List<BrandListItemVO> list = brandService.list();
+        return JsonResult.ok(list);
     }
 }

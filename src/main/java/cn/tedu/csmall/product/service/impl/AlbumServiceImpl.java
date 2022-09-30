@@ -4,6 +4,7 @@ import cn.tedu.csmall.product.ex.ServiceException;
 import cn.tedu.csmall.product.mapper.AlbumMapper;
 import cn.tedu.csmall.product.pojo.dto.AlbumAddNewDTO;
 import cn.tedu.csmall.product.pojo.entity.Album;
+import cn.tedu.csmall.product.pojo.vo.AlbumListItemVO;
 import cn.tedu.csmall.product.pojo.vo.AlbumStandardVO;
 import cn.tedu.csmall.product.service.IAlbumService;
 import cn.tedu.csmall.product.web.ServiceCode;
@@ -11,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -54,5 +57,11 @@ public class AlbumServiceImpl implements IAlbumService {
         log.debug("即将删除相册数据……");
         albumMapper.deleteById(id);
         log.debug("删除相册，完成！");
+    }
+
+    @Override
+    public List<AlbumListItemVO> list() {
+        log.debug("开始处理【查询相册列表】的业务……");
+        return albumMapper.list();
     }
 }

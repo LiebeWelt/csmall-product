@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 public class AlbumServiceTests {
 
@@ -41,6 +43,15 @@ public class AlbumServiceTests {
             System.out.println("删除相册成功！");
         } catch (ServiceException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    void testList() {
+        List<?> list = service.list();
+        System.out.println("查询列表完成,列表中的数据的数量="+list.size());
+        for (Object item : list) {
+            System.out.println(item);
         }
     }
 }
