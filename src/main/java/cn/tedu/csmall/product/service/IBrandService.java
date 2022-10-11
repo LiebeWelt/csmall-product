@@ -11,6 +11,10 @@ public interface IBrandService {
 
     void delete(Long id);
 
+    void setEnable(Long id);
+
+    void setDisable(Long id);
+
     List<BrandListItemVO> list();
 
 }

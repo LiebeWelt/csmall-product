@@ -87,6 +87,11 @@
         SELECT count(*) FROM pms_attribute
     </select>
 
+    <!-- int countByNameAndTemplate(@Param("name") String name, @Param("templateId") Long templateId); -->
+    <select id="countByNameAndTemplate" resultType="int">
+        SELECT count(*) FROM pms_attribute WHERE name=#{name} AND template_id=#{templateId}
+    </select>
+
     <!-- AttributeStandardVO getStandardById(Long id); -->
     <select id="getStandardById" resultMap="StandardResultMap">
         SELECT
@@ -105,6 +110,18 @@
             pms_attribute
         ORDER BY
             sort DESC, id DESC
+    </select>
+
+    <!-- List<AttributeListItemVO> listByTemplateId(Long templateId); -->
+    <select id="listByTemplateId" resultMap="ListItemResultMap">
+        SELECT
+        <include refid="ListItemQueryFields" />
+        FROM
+        pms_attribute
+        WHERE
+        template_id=#{templateId}
+        ORDER BY
+        sort DESC, id
     </select>
 
     <sql id="StandardQueryFields">
@@ -152,6 +169,32 @@
 
     <resultMap id="ListResultMap"
                type="cn.tedu.csmall.product.pojo.vo.AttributeListItemVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="type" property="type"/>
+        <result column="input_type" property="inputType"/>
+        <result column="value_list" property="valueList"/>
+        <result column="unit" property="unit"/>
+        <result column="sort" property="sort"/>
+        <result column="is_allow_customize" property="isAllowCustomize"/>
+    </resultMap>
+
+    <sql id="ListItemQueryFields">
+        <if test="true">
+            id,
+            name,
+            description,
+            type,
+            input_type,
+            value_list,
+            unit,
+            sort,
+            is_allow_customize
+        </if>
+    </sql>
+
+    <resultMap id="ListItemResultMap" type="cn.tedu.csmall.product.pojo.vo.AttributeListItemVO">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>
