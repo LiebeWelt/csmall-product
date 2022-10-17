@@ -12,4 +12,6 @@ public interface ICategoryService {
     void delete(Long id);
 
     List<CategoryListItemVO> list();
+
+    List<CategoryListItemVO> listByParentId(Long parentId);
 }

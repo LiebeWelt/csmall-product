@@ -67,4 +67,9 @@ public class CategoryServiceImpl implements ICategoryService {
         log.debug("开始处理【查询相册列表】的业务……");
         return categoryMapper.list();
     }
+
+    @Override
+    public List<CategoryListItemVO> listByParentId(Long parentId) {
+        return categoryMapper.listByParentId(parentId);
+    }
 }

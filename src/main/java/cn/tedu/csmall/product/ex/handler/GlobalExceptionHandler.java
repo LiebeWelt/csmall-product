@@ -4,6 +4,7 @@ import cn.tedu.csmall.product.ex.ServiceException;
 import cn.tedu.csmall.product.web.JsonResult;
 import cn.tedu.csmall.product.web.ServiceCode;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -66,6 +67,13 @@ public class GlobalExceptionHandler {
     public String handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         log.debug("捕获到HttpRequestMethodNotSupportedException：{}", e.getMessage());
         return "非法访问！";
+    }
+
+    @ExceptionHandler
+    public JsonResult handleAccessDeniedException(AccessDeniedException e) {
+        log.debug("捕获到AccessDeniedException：{}", e.getMessage());
+        String message = "请求失败，当前登录的账号不具备此操作权限！";
+        return JsonResult.fail(ServiceCode.ERR_FORBIDDEN, message);
     }
 
     @ExceptionHandler

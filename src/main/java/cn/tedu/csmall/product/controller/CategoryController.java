@@ -7,6 +7,7 @@ import cn.tedu.csmall.product.service.ICategoryService;
 import cn.tedu.csmall.product.web.JsonResult;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,20 @@ public class CategoryController {
     public JsonResult<List<CategoryListItemVO>> list() {
         log.debug("开始处理【查询相册列表】的请求……");
         List<CategoryListItemVO> list = categoryService.list();
+        return JsonResult.ok(list);
+    }
+
+    // http://localhost:9080/categories/list-by-parent??parentId=0
+    @ApiOperation("根据父级类别查询子级类别列表")
+    @ApiOperationSupport(order = 410)
+    @ApiImplicitParam(name = "parentId", value = "父级类别id，如果是一级类别，则此参数值应该为0",
+            required = true, dataType = "long")
+    @GetMapping("/list-by-parent")
+    public JsonResult<List<CategoryListItemVO>> listByParentId(Long parentId) {
+        if (parentId == null || parentId < 0) {
+            parentId = 0L;
+        }
+        List<CategoryListItemVO> list = categoryService.listByParentId(parentId);
         return JsonResult.ok(list);
     }
 }

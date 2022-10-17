@@ -108,6 +108,19 @@
             sort DESC, id DESC
     </select>
 
+    <!-- List<CategoryListItemVO> listByParentId(Long parentId); -->
+    <select id="listByParentId" resultMap="ListItemResultMap">
+        SELECT
+        <include refid="ListItemQueryFields"/>
+        FROM
+        pms_category
+        WHERE
+        parent_id=#{parentId}
+        ORDER BY
+        sort DESC, id
+    </select>
+
+
     <sql id="StandardQueryFields">
         <if test="true">
             id,
@@ -153,6 +166,35 @@
     </sql>
 
     <resultMap id="ListResultMap"
+               type="cn.tedu.csmall.product.pojo.vo.CategoryListItemVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="depth" property="depth"/>
+        <result column="keywords" property="keywords"/>
+        <result column="sort" property="sort"/>
+        <result column="icon" property="icon"/>
+        <result column="enable" property="enable"/>
+        <result column="is_parent" property="isParent"/>
+        <result column="is_display" property="isDisplay"/>
+    </resultMap>
+
+    <sql id="ListItemQueryFields">
+        <if test="true">
+            id,
+            name,
+            parent_id,
+            depth,
+            keywords,
+            sort,
+            icon,
+            enable,
+            is_parent,
+            is_display
+        </if>
+    </sql>
+
+    <resultMap id="ListItemResultMap"
                type="cn.tedu.csmall.product.pojo.vo.CategoryListItemVO">
         <id column="id" property="id"/>
         <result column="name" property="name"/>

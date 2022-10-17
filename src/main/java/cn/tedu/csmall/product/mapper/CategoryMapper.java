@@ -80,4 +80,11 @@ public interface CategoryMapper {
      */
     List<CategoryListItemVO> list();
 
+    /**
+     * 根据父级类别的id查询类别列表
+     *
+     * @param parentId 父级类别的id
+     * @return 类别列表
+     */
+    List<CategoryListItemVO> listByParentId(Long parentId);
 }
